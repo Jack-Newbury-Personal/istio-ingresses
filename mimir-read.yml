@@ -1,0 +1,34 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: mimir-read-http-gateway
+spec:
+  selector:
+    istio: ingress
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "mimir.jack-newbury.co.uk"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: mimir-read-vs
+spec:
+  hosts:
+    - "mimir.jack-newbury.co.uk"
+  gateways:
+    - mimir-read-http-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /prometheus
+
+      route:
+        - destination:
+            host: mimir-nginx
+            port:
+              number: 80
