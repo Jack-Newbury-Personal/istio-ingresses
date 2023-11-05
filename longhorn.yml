@@ -1,15 +1,31 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: longhorn-cert
+  namespace: istio-ingress
+spec:
+  dnsNames:
+    - longhorn.jack-newbury.co.uk
+  secretName: longhorn-cert-tls
+  issuerRef:
+    name: jack-newbury-selfsigned
+---
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: http-gateway
+  namespace: longhorn-system
 spec:
   selector:
     istio: ingress
   servers:
     - port:
-        number: 80
-        name: http
-        protocol: HTTP
+        number: 443
+        name: https
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: "longhorn-cert-tls"
       hosts:
         - "longhorn.jack-newbury.co.uk"
 ---
@@ -17,6 +33,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: longhorn
+  namespace: longhorn-system
 spec:
   hosts:
     - "longhorn.jack-newbury.co.uk"
