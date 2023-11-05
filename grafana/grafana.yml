@@ -27,8 +27,8 @@ spec:
     - grafana-https-gateway
   tls:
     - match:
-        - uri:
-            prefix: /
+        - sniHosts:
+            - "grafana.jack-newbury.co.uk"
       route:
         - destination:
             host: grafana
