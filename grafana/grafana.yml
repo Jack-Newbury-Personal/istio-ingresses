@@ -12,7 +12,7 @@ spec:
         protocol: HTTPS
       tls:
         mode: SIMPLE
-        credentialName: "grafana-cert"
+        credentialName: "grafana-cert-tls"
       hosts:
         - "grafana.jack-newbury.co.uk"
 ---
