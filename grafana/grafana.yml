@@ -43,6 +43,9 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: istio
 spec:
+  rules:
+    - host: grafana.jack-newbury.co.uk
+      http: ...
   tls:
     - hosts:
         - grafana.jack-newbury.co.uk # This should match a DNS name in the Certificate
