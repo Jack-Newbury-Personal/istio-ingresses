@@ -32,3 +32,4 @@ spec:
       route:
         - destination:
             host: grafana
+            port: 80
