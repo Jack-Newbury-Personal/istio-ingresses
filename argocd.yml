@@ -1,16 +1,8 @@
 apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: jack-newbury-selfsigned
-  namespace: argocd
-spec:
-  selfSigned: {}
----
-apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: argo-cert
-  namespace: argocd
+  namespace: istio-system
 spec:
   dnsNames:
     - argo.jack-newbury.co.uk
@@ -22,6 +14,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: argocd-https-gateway
+  namespace: argocd
 spec:
   selector:
     istio: ingress
@@ -40,6 +33,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: argocd-https
+  namespace: argocd
 spec:
   hosts:
     - "argocd.jack-newbury.co.uk"
@@ -54,4 +48,4 @@ spec:
         - destination:
             host: argocd-server
             port:
-              number: 80
+              number: 443
