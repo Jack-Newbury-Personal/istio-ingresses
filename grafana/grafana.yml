@@ -25,7 +25,7 @@ spec:
     - "grafana.jack-newbury.co.uk"
   gateways:
     - grafana-https-gateway
-  http:
+  tls:
     - match:
         - uri:
             prefix: /
