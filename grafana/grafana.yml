@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: grafana-http-gateway
+  name: grafana-https-gateway
 spec:
   selector:
     istio: ingress
@@ -19,12 +19,12 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: grafana-http
+  name: grafana-https
 spec:
   hosts:
     - "grafana.jack-newbury.co.uk"
   gateways:
-    - grafana-http-gateway
+    - grafana-https-gateway
   http:
     - match:
         - uri:
