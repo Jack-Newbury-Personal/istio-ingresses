@@ -25,10 +25,10 @@ spec:
     - "grafana.jack-newbury.co.uk"
   gateways:
     - grafana-https-gateway
-  tls:
+  http:
     - match:
-        - sniHosts:
-            - "grafana.jack-newbury.co.uk"
+        - uri:
+            prefix: /
       route:
         - destination:
             host: grafana
